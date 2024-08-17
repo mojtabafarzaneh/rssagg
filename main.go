@@ -60,6 +60,9 @@ func main() {
 	v1router.Get("/healthz", handlerReadiness)
 	v1router.Get("/err", HandleErrResponse)
 	v1router.Post("/users", apiCon.handlerCreateUser)
+	v1router.Get("/users", apiCon.MiddlewareAuth(apiCon.handlerGetUser))
+	v1router.Post("/feeds", apiCon.MiddlewareAuth(apiCon.CreateFeed))
+	v1router.Get("/feeds", apiCon.GetFeeds)
 	router.Mount("/v1", v1router)
 
 	log.Printf("server is starting on port %v", portString)
