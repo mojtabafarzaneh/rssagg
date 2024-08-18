@@ -63,6 +63,9 @@ func main() {
 	v1router.Get("/users", apiCon.MiddlewareAuth(apiCon.handlerGetUser))
 	v1router.Post("/feeds", apiCon.MiddlewareAuth(apiCon.CreateFeed))
 	v1router.Get("/feeds", apiCon.GetFeeds)
+	v1router.Post("/follow", apiCon.MiddlewareAuth(apiCon.CreateFeedsFollowsHandler))
+	v1router.Get("/follow", apiCon.MiddlewareAuth(apiCon.GetFeedsfollowsHandler))
+	v1router.Delete("/follow/{feedfollowid}", apiCon.MiddlewareAuth(apiCon.DeleteFeedsFollowsHandler))
 	router.Mount("/v1", v1router)
 
 	log.Printf("server is starting on port %v", portString)
